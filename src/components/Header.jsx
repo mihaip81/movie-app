@@ -1,10 +1,13 @@
 import React from "react";
 
-function Header(){
+
+
+function Header(props){
+
     return (
         <header style={headerStyling.headerDiv}>
             <h1 style={headerStyling.myMovieApp}>MyMovieApp</h1>
-            <button style={headerStyling.addMovieButton}>Add Movie</button>
+            <button style={headerStyling.addMovieButton} onClick={props.onOpenAddMovie} >Add Movie</button>
         </header>
     );
 }

@@ -1,15 +1,27 @@
 import React from "react";
 
-function AddMovie(){
+function AddMovie(props){
     return(
     <div className="modal" id="modal" style={AddMovieStyling.modal}>
         <div style={AddMovieStyling.modalContainer}>
             <div className="modalHeader" style={AddMovieStyling.modalHeader}>
-                <div className="title" style={AddMovieStyling.title}>Title</div>
-                <button className="closeButton" style={AddMovieStyling.closeButton}>&times;</button>
+                <div className="title" style={AddMovieStyling.title}>Add a new movie</div>
+                <button className="closeButton" style={AddMovieStyling.closeButton} onClick={props.onCloseAddMovie}>&times;</button>
             </div>
             <div className="modalBody" style={AddMovieStyling.modalBody}>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad quod ea fuga voluptatem libero tempora provident magni eligendi voluptatibus, voluptas necessitatibus ut sequi reprehenderit corrupti eius debitis fugiat exercitationem quam distinctio dolore et consectetur? Veritatis tempora maxime laboriosam ut rem obcaecati dolorum suscipit saepe deserunt, corrupti adipisci sunt consequatur nihil quae ea. Qui similique vero ut porro dicta possimus tenetur aliquam in dolore repellendus, voluptas temporibus iusto, ratione quasi. Maiores beatae minus perferendis adipisci aspernatur ratione labore at rem facilis?
+                <label htmlFor="" style={AddMovieStyling.label}>
+                    Upload Movie Photo
+                    <input type="file" id="photoFile" placeholder="Upload photo" style={AddMovieStyling.file}/>
+                </label>
+                <label htmlFor="" style={AddMovieStyling.label}>
+                    Name
+                    <input type="text" id="name" placeholder="Ex: John Wick 4" style={AddMovieStyling.input}/>
+                </label>
+                <label htmlFor="" style={AddMovieStyling.label}>
+                    Description
+                    <textarea name="" id="description" cols="30" rows="10" placeholder="Type here a description..." style={AddMovieStyling.input}></textarea>
+                </label>
+                <button style={AddMovieStyling.submitNewMovie} onClick={props.onStoreMovie}>Upload movie</button>
             </div>
         </div>
     </div>
@@ -30,8 +42,8 @@ const AddMovieStyling = {
     },
 
     modalContainer: {
-        width: "50%",
-        backgroundColor: "white"
+        padding: "25px",
+        backgroundColor: "white",
     },
 
     modalHeader: {
@@ -52,22 +64,44 @@ const AddMovieStyling = {
         border: "none",
         outline: "none",
         background: "none",
-        fontSize: "20px",
+        fontSize: "30px",
         fontWeight: "bold"
     },
     
     modalBody: {
-        padding: "10px 15px"
+        padding: "10px 15px",
+        flexDirection: "column",
+        display: "flex",
     },
 
     overlay: {
         position: "absolute",
-        // opacity: "0",
         top: "0",
         bottom: "0",
         left: "0",
         right: "0",
         backgroundColor: "rgba(0, 0, 0, 0.5)",
+    },
+
+    label: {
+        display: "flex",
+        flexDirection: "column",
+        padding: "5px"
+    },
+
+    input: {
+        padding: "15px",
+        margin: "10px 0px"
+    },
+
+    file: {
+        margin: "10px 0px"
+    },
+
+    submitNewMovie: {
+        width: "100%",
+        height: "40px",
+        cursor: "pointer",
 
     }
 }
