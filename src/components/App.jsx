@@ -3,10 +3,12 @@ import Card from "./Card";
 import Footer from "./Footer";
 import Header from "./Header";
 import AddMovie from "./AddMovie";
+
 //react conditional rendering
 function App(){
 
     const [isAddMovieOpen, setIsAddMovieOpen] = useState(false);
+    const [movies, setMovies] = useState([])
 
     function openAddMovie(){
         setIsAddMovieOpen(true)
@@ -16,26 +18,27 @@ function App(){
         setIsAddMovieOpen(false)
     }
 
-    const [values, setValues] = useState([])
+    function storeMovie(movie){
+        
+        setMovies((prevMovie) =>{
+            const newMovies = [...prevMovie, movie]
+            let myObjMovie_serialized = JSON.stringify({newMovies})
+            localStorage.setItem("movies", myObjMovie_serialized)
+            return newMovies
+        })
+        let myObjMovie_deserialized = JSON.parse(localStorage.getItem("movies"))
 
-
-
-
-    function storeMovie(){
-        setValues(values.push({photo: document.getElementById("photoFile").value, name: document.getElementById("name").value, description: document.getElementById("description").value}))
-        let myObjMovie_serialized = JSON.stringify(values)
-        localStorage.setItem("values", myObjMovie_serialized)
-        let myObjMovie_deserialized = JSON.parse(localStorage.getItem("values"))
-        console.log(myObjMovie_deserialized)
     }
-
-
+console.log(movies)
 
     return (
         <div>
             <Header onOpenAddMovie = {openAddMovie}/>
             {isAddMovieOpen ? <AddMovie onCloseAddMovie = {closeAddMovie} onStoreMovie = {storeMovie}/> : null}
-            <Card />
+            {movies.map((movie, index) =>{
+                return(
+                    <Card key={index} id={index} image={movie.image} name={movie.name} description={movie.description} />                           
+                    )})}
             <Footer />
         </div>
     )

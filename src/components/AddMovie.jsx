@@ -1,6 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 
 function AddMovie(props){
+
+    const [objectMovie, setObjectMovie] = useState({
+        image: "",
+        name: "",
+        description: ""
+    })
+    function handleChange(event){
+        const {value, name} = event.target
+
+        setObjectMovie((prevValue) =>{
+            return {
+                ...prevValue,[name] : value
+            }
+        })
+    }
+    function submitMovie(event){
+        props.onStoreMovie(objectMovie)
+        setObjectMovie({
+            image: "",
+            name: "",
+            description: ""
+        });
+        event.preventDefault()
+    }
+
+    
+
     return(
     <div className="modal" id="modal" style={AddMovieStyling.modal}>
         <div style={AddMovieStyling.modalContainer}>
@@ -9,19 +36,19 @@ function AddMovie(props){
                 <button className="closeButton" style={AddMovieStyling.closeButton} onClick={props.onCloseAddMovie}>&times;</button>
             </div>
             <div className="modalBody" style={AddMovieStyling.modalBody}>
-                <label htmlFor="" style={AddMovieStyling.label}>
+                <label style={AddMovieStyling.label}>
                     Upload Movie Photo
-                    <input type="file" id="photoFile" placeholder="Upload photo" style={AddMovieStyling.file}/>
+                    <input name="photo" type="file" id="photoFile" placeholder="Upload photo" style={AddMovieStyling.file} onChange={handleChange}/>
                 </label>
-                <label htmlFor="" style={AddMovieStyling.label}>
+                <label style={AddMovieStyling.label}>
                     Name
-                    <input type="text" id="name" placeholder="Ex: John Wick 4" style={AddMovieStyling.input}/>
+                    <input name="name" type="text" id="name" placeholder="Ex: John Wick 4" style={AddMovieStyling.input} onChange={handleChange}/>
                 </label>
-                <label htmlFor="" style={AddMovieStyling.label}>
+                <label style={AddMovieStyling.label}>
                     Description
-                    <textarea name="" id="description" cols="30" rows="10" placeholder="Type here a description..." style={AddMovieStyling.input}></textarea>
+                    <textarea onChange={handleChange} name="description" id="description" cols="30" rows="10" placeholder="Type here a description..." style={AddMovieStyling.input}></textarea>
                 </label>
-                <button style={AddMovieStyling.submitNewMovie} onClick={props.onStoreMovie}>Upload movie</button>
+                <button style={AddMovieStyling.submitNewMovie} onClick={submitMovie}>Upload movie</button>
             </div>
         </div>
     </div>
