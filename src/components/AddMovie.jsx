@@ -18,12 +18,7 @@ function AddMovie(props){
     }
     function submitMovie(event){
         props.onStoreMovie(objectMovie)
-        setObjectMovie({
-            image: "",
-            name: "",
-            description: ""
-        });
-        event.preventDefault()
+        props.onCloseAddMovie()
     }
 
     

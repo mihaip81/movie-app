@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -9,6 +9,7 @@ function App(){
 
     const [isAddMovieOpen, setIsAddMovieOpen] = useState(false);
     const [movies, setMovies] = useState([])
+
 
     function openAddMovie(){
         setIsAddMovieOpen(true)
@@ -22,14 +23,29 @@ function App(){
         
         setMovies((prevMovie) =>{
             const newMovies = [...prevMovie, movie]
-            let myObjMovie_serialized = JSON.stringify({newMovies})
+            let myObjMovie_serialized = JSON.stringify(newMovies)
             localStorage.setItem("movies", myObjMovie_serialized)
+
             return newMovies
         })
-        let myObjMovie_deserialized = JSON.parse(localStorage.getItem("movies"))
 
+
+        let myObjMovie_deserialized = JSON.parse(localStorage.getItem("movies"))
     }
-console.log(movies)
+
+    //FIRST TRY
+    // let myObjMovie_deserialized = JSON.parse(localStorage.getItem("movies"))
+    // setMovies((prevMovie) =>{
+    //     const endMovies = [...prevMovie, JSON.parse(localStorage.getItem("movies"))]
+    //     return endMovies
+    // })
+
+    // SECOND TRY
+    useEffect(() =>{
+        const movieData = JSON.parse(localStorage.getItem("movies"))
+        setMovies(movieData)
+        console.log(movieData)
+    }, [])
 
     return (
         <div>
