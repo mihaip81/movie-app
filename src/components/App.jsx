@@ -43,31 +43,25 @@ function App(){
         let myObjMovie_deserialized = JSON.parse(localStorage.getItem("movies"))
     }
 
-    // function changeMovie(id){
-    //     setMovies((prevMovie) =>{
-    //         return prevMovie.slice(movieItem, index)
-    //     })
-    // }
-
-    function deleteMovie(id){
+    function modifyMovie(id){
         setMovies((prevMovie) =>{
             return prevMovie.filter((movItem, index) =>{
-                console.log(index);
                 return index != id;
             }); 
         })
     }
 
-    
+    function deleteMovie(id){
+        setMovies((prevMovies) =>{
+            const newMovies =  prevMovies.filter((movItem, index) =>{
+                return index != id;
+            }); 
+            let myObjMovie_serialized = JSON.stringify(newMovies)
+            localStorage.setItem("movies", myObjMovie_serialized)
+            return newMovies
+        })
+    }
 
-    //FIRST TRY
-    // let myObjMovie_deserialized = JSON.parse(localStorage.getItem("movies"))
-    // setMovies((prevMovie) =>{
-    //     const endMovies = [...prevMovie, JSON.parse(localStorage.getItem("movies"))]
-    //     return endMovies
-    // })
-
-    // SECOND TRY
     useEffect(() =>{
         const movieData = JSON.parse(localStorage.getItem("movies"))
         if(movieData){
@@ -79,7 +73,7 @@ function App(){
         <div style={AppStyling.container}>
             <Header onOpenAddMovie = {openAddMovie}/>
             {isAddMovieOpen ? <AddMovie onCloseAddMovie = {closeAddMovie} onStoreMovie = {storeMovie}/> : null}
-            {isModifyMovieOpen ? <ModifyMovie onCloseModifyMovie = {closeModifyMovie}/> : null}
+            {isModifyMovieOpen ? <ModifyMovie onCloseModifyMovie = {closeModifyMovie} onModifyMovie = {modifyMovie} onStoreMovie = {storeMovie}/> : null}
             {movies.map((movie, index) =>{
                 return(
                     <Card key={index} id={index} image={movie.image} name={movie.name} description={movie.description} onOpenModifyMovie={openModifyMovie} onDeleteMovie={deleteMovie}/>                           
@@ -91,7 +85,7 @@ function App(){
 
 const AppStyling = {
     container: {
-        backgroundColor : "#333333"
+        backgroundColor : "#f5f5dc"
     }
 }
 

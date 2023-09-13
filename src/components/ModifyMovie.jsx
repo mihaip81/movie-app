@@ -18,8 +18,10 @@ function handleChange(event){
     })
     }
 
-    function submitMovie(){
-
+    function modifyMovie(){
+        props.onModifyMovie(props.id)
+        props.onStoreMovie(objectMovie)
+        props.onCloseModifyMovie()
     }
 
 
@@ -43,7 +45,7 @@ function handleChange(event){
                         Description
                         <textarea onChange={handleChange} name="description" id="description" cols="30" rows="10" placeholder="Type here a description..." style={AddMovieStyling.input}></textarea>
                     </label>
-                    <button style={AddMovieStyling.submitNewMovie} onClick={submitMovie}>Modify Movie</button>
+                    <button style={AddMovieStyling.submitNewMovie} onClick={modifyMovie}>Modify Movie</button>
                 </div>
             </div>
         </div>
