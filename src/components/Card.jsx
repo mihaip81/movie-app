@@ -24,7 +24,7 @@ function Card(props){
             <p>{props.name}</p>
             <img src= {props.image} alt="" />
             <p>{props.description}</p>
-            <button>Modify</button>
+            <button onClick={props.onOpenModifyMovie}>Modify</button>
             <button>Delete</button>
         </div>
     )
