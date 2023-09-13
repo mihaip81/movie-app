@@ -43,6 +43,21 @@ function App(){
         let myObjMovie_deserialized = JSON.parse(localStorage.getItem("movies"))
     }
 
+    // function changeMovie(id){
+    //     setMovies((prevMovie) =>{
+    //         return prevMovie.slice(movieItem, index)
+    //     })
+    // }
+
+    function deleteMovie(id){
+        setMovies((prevMovie) =>{
+            return prevMovie.filter((movItem, index) =>{
+                console.log(index);
+                return index != id;
+            }); 
+        })
+    }
+
     
 
     //FIRST TRY
@@ -61,20 +76,24 @@ function App(){
     }, [])
 
     return (
-        <div>
+        <div style={AppStyling.container}>
             <Header onOpenAddMovie = {openAddMovie}/>
             {isAddMovieOpen ? <AddMovie onCloseAddMovie = {closeAddMovie} onStoreMovie = {storeMovie}/> : null}
             {isModifyMovieOpen ? <ModifyMovie onCloseModifyMovie = {closeModifyMovie}/> : null}
             {movies.map((movie, index) =>{
                 return(
-                    <Card key={index} id={index} image={movie.image} name={movie.name} description={movie.description} onOpenModifyMovie={openModifyMovie}/>                           
+                    <Card key={index} id={index} image={movie.image} name={movie.name} description={movie.description} onOpenModifyMovie={openModifyMovie} onDeleteMovie={deleteMovie}/>                           
                     )})}
             <Footer />
         </div>
     )
 }
 
-
+const AppStyling = {
+    container: {
+        backgroundColor : "#333333"
+    }
+}
 
 export default App;
 

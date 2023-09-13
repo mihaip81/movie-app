@@ -2,22 +2,10 @@ import React, { useState, useEffect } from "react";
 
 function Card(props){
 
-    // A PATRA INCERCARE
-    // const [showMovie, setShowMovie] = useState();
-
-    //     useEffect(() =>{
-    //     const movieData = JSON.parse(localStorage.getItem("movies"))
-    //     setShowMovie((prevValue) =>{
-    //         return {...prevValue, movieData}
-    //     })
-    // }, [showMovie])
-
-        // A TREIA INCERCARE
-        // useEffect(() =>{
-    //     const movieData = JSON.parse(localStorage.getItem("movies"))
-    //     setMovies(movieData)
-    // }, [movies])
-
+    function handleClick(){
+        props.onDeleteMovie(props.id);
+    }
+        //DE CE AICI A TREBUIT NEAPARAT SA APELEZ FUNCTIA IN CARD, SI NU AM PUTUT SA O IAU DIRECT DIN APP?!?!!^^^^^
 
     return(
         <div>
@@ -25,7 +13,7 @@ function Card(props){
             <img src= {props.image} alt="" />
             <p>{props.description}</p>
             <button onClick={props.onOpenModifyMovie}>Modify</button>
-            <button>Delete</button>
+            <button onClick={handleClick}>Delete</button>
         </div>
     )
 }
