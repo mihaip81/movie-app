@@ -19,8 +19,7 @@ function handleChange(event){
     }
 
     function modifyMovie(){
-        props.onModifyMovie(props.id)
-        props.onStoreMovie(objectMovie)
+        props.onModifyMovie(objectMovie)
         props.onCloseModifyMovie()
     }
 

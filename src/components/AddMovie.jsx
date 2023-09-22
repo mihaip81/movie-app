@@ -5,7 +5,8 @@ function AddMovie(props){
     const [objectMovie, setObjectMovie] = useState({
         image: "",
         name: "",
-        description: ""
+        description: "",
+        id: ""
     })
     function handleChange(event){
         const {value, name} = event.target
@@ -16,7 +17,7 @@ function AddMovie(props){
             }
         })
     }
-    function submitMovie(event){
+    function submitMovie(){
         props.onStoreMovie(objectMovie)
         props.onCloseAddMovie()
     }
