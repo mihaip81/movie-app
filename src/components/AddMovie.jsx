@@ -3,7 +3,6 @@ import React, { useState } from "react";
 function AddMovie(props){
 
     const [objectMovie, setObjectMovie] = useState({
-        image: "",
         name: "",
         description: "",
         id: ""
@@ -32,10 +31,6 @@ function AddMovie(props){
                 <button className="closeButton" style={AddMovieStyling.closeButton} onClick={props.onCloseAddMovie}>&times;</button>
             </div>
             <div className="modalBody" style={AddMovieStyling.modalBody}>
-                <label style={AddMovieStyling.label}>
-                    Upload Movie Photo
-                    <input name="photo" type="file" id="photoFile" placeholder="Upload photo" style={AddMovieStyling.file} onChange={handleChange}/>
-                </label>
                 <label style={AddMovieStyling.label}>
                     Name
                     <input name="name" type="text" id="name" placeholder="Ex: John Wick 4" style={AddMovieStyling.input} onChange={handleChange}/>
